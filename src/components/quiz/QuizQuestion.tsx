@@ -2,9 +2,6 @@
 
 import { motion } from "framer-motion";
 import type { Question, Option, ThemeType } from "@/types/content";
-import { IdentityButton } from "@/components/themes/IdentityTheme";
-import { DevButton } from "@/components/themes/DevTheme";
-import { RetroButton } from "@/components/themes/RetroTheme";
 
 interface QuizQuestionProps {
   question: Question;
@@ -14,27 +11,29 @@ interface QuizQuestionProps {
 }
 
 export function QuizQuestion({ question, onAnswer, theme, disabled }: QuizQuestionProps) {
-  const ButtonComponent = getButtonComponent(theme);
-
   return (
     <div>
-      <motion.h2
+      {/* 질문 텍스트 */}
+      <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className={getQuestionStyles(theme)}
+        className="mb-8 text-center"
       >
-        {question.text}
-      </motion.h2>
+        <h2 className="text-xl font-black leading-relaxed text-gray-800 sm:text-2xl">
+          {question.text}
+        </h2>
+      </motion.div>
 
-      <div className={getOptionsContainerStyles(theme)}>
+      {/* 선택지 */}
+      <div className="space-y-3">
         {question.options.map((option, index) => (
           <motion.div
             key={option.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.08 }}
           >
-            <OptionButton
+            <PlayfulOptionButton
               option={option}
               onClick={() => onAnswer(option)}
               theme={theme}
@@ -48,7 +47,7 @@ export function QuizQuestion({ question, onAnswer, theme, disabled }: QuizQuesti
   );
 }
 
-function OptionButton({
+function PlayfulOptionButton({
   option,
   onClick,
   theme,
@@ -61,92 +60,49 @@ function OptionButton({
   disabled: boolean;
   index: number;
 }) {
-  if (theme === "identity") {
-    return (
-      <motion.button
-        whileHover={{ scale: disabled ? 1 : 1.02 }}
-        whileTap={{ scale: disabled ? 1 : 0.98 }}
-        onClick={onClick}
-        disabled={disabled}
-        className={`
-          w-full rounded-xl border border-slate-200 bg-white px-6 py-4 text-left
-          transition-all duration-200 hover:border-slate-300 hover:shadow-sm
-          disabled:cursor-not-allowed disabled:opacity-50
-        `}
-      >
-        <span className="text-sm text-slate-600">{option.text}</span>
-      </motion.button>
-    );
-  }
+  // 테마별 색상
+  const colors = theme === "identity"
+    ? ["bg-violet-100 hover:bg-violet-200 border-violet-300", "bg-pink-100 hover:bg-pink-200 border-pink-300", "bg-cyan-100 hover:bg-cyan-200 border-cyan-300", "bg-amber-100 hover:bg-amber-200 border-amber-300"]
+    : ["bg-cyan-100 hover:bg-cyan-200 border-cyan-300", "bg-pink-100 hover:bg-pink-200 border-pink-300", "bg-lime-100 hover:bg-lime-200 border-lime-300", "bg-orange-100 hover:bg-orange-200 border-orange-300"];
 
-  if (theme === "dev") {
-    return (
-      <motion.button
-        whileHover={{ scale: disabled ? 1 : 1.01 }}
-        whileTap={{ scale: disabled ? 1 : 0.99 }}
-        onClick={onClick}
-        disabled={disabled}
-        className={`
-          w-full rounded-md border border-[#30363d] bg-[#0d1117] px-4 py-3
-          text-left font-mono text-sm text-[#c9d1d9]
-          transition-all duration-150 hover:border-[#58a6ff] hover:bg-[#161b22]
-          disabled:cursor-not-allowed disabled:opacity-50
-        `}
-      >
-        <span className="mr-2 text-[#8b949e]">[{index + 1}]</span>
-        {option.text}
-      </motion.button>
-    );
-  }
+  const colorClass = colors[index % colors.length];
+  const labels = ["A", "B", "C", "D"];
 
-  // Retro theme
   return (
     <motion.button
+      whileHover={{ scale: disabled ? 1 : 1.02, x: disabled ? 0 : 4 }}
       whileTap={{ scale: disabled ? 1 : 0.98 }}
       onClick={onClick}
       disabled={disabled}
       className={`
-        w-full border-2 border-[#dfdfdf] border-b-[#404040] border-r-[#404040]
-        bg-[#c0c0c0] px-4 py-3 text-left text-sm
-        active:border-[#404040] active:border-b-[#dfdfdf] active:border-r-[#dfdfdf]
+        group relative w-full rounded-xl border-2 border-black p-4 text-left
+        shadow-[3px_3px_0_0_#000] transition-all
+        hover:shadow-[5px_5px_0_0_#000]
+        active:shadow-[1px_1px_0_0_#000] active:translate-x-[2px] active:translate-y-[2px]
         disabled:cursor-not-allowed disabled:opacity-50
+        ${colorClass}
       `}
     >
-      <span className="mr-2 text-[#000080]">▶</span>
-      {option.text}
+      <div className="flex items-center gap-3">
+        {/* 라벨 */}
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border-2 border-black bg-white text-sm font-black">
+          {labels[index]}
+        </span>
+
+        {/* 텍스트 */}
+        <span className="flex-1 text-sm font-medium text-gray-800 sm:text-base">
+          {option.text}
+        </span>
+
+        {/* 화살표 (호버시) */}
+        <motion.span
+          initial={{ opacity: 0, x: -5 }}
+          whileHover={{ opacity: 1, x: 0 }}
+          className="text-lg opacity-0 transition-opacity group-hover:opacity-100"
+        >
+          →
+        </motion.span>
+      </div>
     </motion.button>
   );
-}
-
-function getButtonComponent(theme: ThemeType) {
-  switch (theme) {
-    case "dev":
-      return DevButton;
-    case "retro":
-      return RetroButton;
-    default:
-      return IdentityButton;
-  }
-}
-
-function getQuestionStyles(theme: ThemeType): string {
-  switch (theme) {
-    case "dev":
-      return "mb-8 text-lg font-mono text-[#c9d1d9]";
-    case "retro":
-      return "mb-6 text-base font-bold";
-    default:
-      return "mb-8 text-xl font-medium text-slate-800";
-  }
-}
-
-function getOptionsContainerStyles(theme: ThemeType): string {
-  switch (theme) {
-    case "dev":
-      return "space-y-3";
-    case "retro":
-      return "space-y-2";
-    default:
-      return "space-y-4";
-  }
 }

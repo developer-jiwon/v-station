@@ -1,4 +1,4 @@
-export type ThemeType = "identity" | "dev" | "retro";
+export type ThemeType = "identity" | "dev" | "retro" | "y2k";
 
 export type LogicType = "score" | "condition";
 
