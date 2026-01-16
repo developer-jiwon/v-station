@@ -184,7 +184,7 @@ export default function HomePage() {
           </div>
 
           {/* 카드 그리드 */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-5">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5">
             {identityContents.map((content, i) => (
               <IdentityCard key={content.id} content={content} index={i} />
             ))}
@@ -225,7 +225,7 @@ export default function HomePage() {
           </div>
 
           {/* 카드 그리드 */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-5">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5">
             {retroContents.map((content, i) => (
               <RetroCard key={content.id} content={content} index={i} />
             ))}
@@ -270,7 +270,7 @@ export default function HomePage() {
           </div>
 
           {/* 카드 그리드 */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-5">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5">
             {y2kContents.map((content, i) => (
               <Y2KCard key={content.id} content={content} index={i} />
             ))}
