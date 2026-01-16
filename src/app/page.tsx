@@ -314,7 +314,7 @@ function IdentityCard({ content, index }: { content: Content; index: number }) {
         className="group relative"
       >
         {/* 카드 프레임 */}
-        <div className="relative h-[280px] overflow-hidden rounded-2xl border-3 border-black bg-white shadow-[5px_5px_0_0_#000] transition-shadow hover:shadow-[7px_7px_0_0_#000]">
+        <div className="relative h-[140px] sm:h-[200px] overflow-hidden rounded-xl sm:rounded-2xl border-2 sm:border-3 border-black bg-white shadow-[3px_3px_0_0_#000] sm:shadow-[5px_5px_0_0_#000] transition-shadow hover:shadow-[4px_4px_0_0_#000] sm:hover:shadow-[7px_7px_0_0_#000]">
           {/* 데모 배경 - isInView일 때만 애니메이션 */}
           <div className="absolute inset-0">
             <IdentityCardBackground slug={content.slug} isAnimating={isInView} />
@@ -461,7 +461,7 @@ function RetroCard({ content, index }: { content: Content; index: number }) {
         className="group relative"
       >
         {/* 카드 프레임 */}
-        <div className="relative h-[280px] overflow-hidden rounded-2xl border-3 border-black bg-white shadow-[5px_5px_0_0_#000] transition-shadow hover:shadow-[7px_7px_0_0_#000]">
+        <div className="relative h-[140px] sm:h-[200px] overflow-hidden rounded-xl sm:rounded-2xl border-2 sm:border-3 border-black bg-white shadow-[3px_3px_0_0_#000] sm:shadow-[5px_5px_0_0_#000] transition-shadow hover:shadow-[4px_4px_0_0_#000] sm:hover:shadow-[7px_7px_0_0_#000]">
           {/* 데모 배경 - isInView일 때만 애니메이션 */}
           <div className="absolute inset-0">
             <RetroCardDemo slug={content.slug} isAnimating={isInView} />
@@ -699,7 +699,7 @@ function Y2KCard({ content, index }: { content: Content; index: number }) {
         className="group relative"
       >
         {/* 카드 프레임 - Y2K 메탈릭 스타일 */}
-        <div className="relative h-[280px] overflow-hidden rounded-xl border-3 border-black bg-gradient-to-br from-fuchsia-100 to-cyan-100 shadow-[5px_5px_0_0_#000] transition-shadow hover:shadow-[7px_7px_0_0_#000]">
+        <div className="relative h-[140px] sm:h-[200px] overflow-hidden rounded-xl border-2 sm:border-3 border-black bg-gradient-to-br from-fuchsia-100 to-cyan-100 shadow-[3px_3px_0_0_#000] sm:shadow-[5px_5px_0_0_#000] transition-shadow hover:shadow-[4px_4px_0_0_#000] sm:hover:shadow-[7px_7px_0_0_#000]">
           {/* 데모 배경 */}
           <div className="absolute inset-0">
             <Y2KCardBackground slug={content.slug} isAnimating={isInView} />
