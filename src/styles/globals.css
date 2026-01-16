@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Pretendard Variable", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* Identity Theme Colors */
+  --color-identity-bg: #fafafa;
+  --color-identity-surface: #ffffff;
+  --color-identity-text: #1a1a1a;
+  --color-identity-muted: #6b7280;
+  --color-identity-accent: #3b82f6;
+
+  /* Dev Theme Colors */
+  --color-dev-bg: #0d1117;
+  --color-dev-surface: #161b22;
+  --color-dev-text: #c9d1d9;
+  --color-dev-muted: #8b949e;
+  --color-dev-accent: #58a6ff;
+  --color-dev-green: #3fb950;
+  --color-dev-yellow: #d29922;
+  --color-dev-red: #f85149;
+
+  /* Retro Theme Colors */
+  --color-retro-bg: #c0c0c0;
+  --color-retro-surface: #dfdfdf;
+  --color-retro-text: #000000;
+  --color-retro-accent: #000080;
+  --color-retro-highlight: #ff00ff;
+  --color-retro-cyan: #00ffff;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-identity-accent);
+  color: white;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Theme-specific scrollbars */
+.theme-dev ::-webkit-scrollbar-thumb {
+  background: #30363d;
+}
+
+.theme-dev ::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+.theme-retro ::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.theme-retro ::-webkit-scrollbar-track {
+  background: #c0c0c0;
+  border: 1px solid #808080;
+}
+
+.theme-retro ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #dfdfdf 0%, #808080 100%);
+  border: 2px outset #dfdfdf;
+}
